@@ -5,7 +5,6 @@ from datetime import datetime
 import uuid
 import openai
 import os
-from openai import OpenAI
 
 # Read the full MDCG guidance from the text file
 with open("mdcg_2020_3.txt", "r", encoding="utf-8") as f:
