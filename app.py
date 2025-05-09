@@ -50,8 +50,11 @@ Return the output in this structure:
    - Cite specific MDCG sections (e.g., “Section 4.3.2.3”) or Charts (e.g., “Chart C”) when possible
 
 6. **Regulatory Action Required**
-   - If MDR Certified:
-   - If MDD Certified (legacy):
+   You MUST:
+   - Clearly specify what the manufacturer should do if the device is **MDR certified**
+   - Clearly specify what to do if the device is **MDD certified (legacy)** under Article 120(3)
+   - Write a statement on whether the change should be notified to notifying body or not and why:
+     
 """
 
     response = openai.ChatCompletion.create(
