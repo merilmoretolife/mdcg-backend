@@ -10,7 +10,7 @@ import os
 with open("mdcg_2020_3.txt", "r", encoding="utf-8") as f:
     mdcg_text = f.read()
 
-client = OpenAI()
+client = openai()
 
 def assess_change_with_ai(change_description):
     prompt = f"""
