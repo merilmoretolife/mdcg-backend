@@ -40,7 +40,7 @@ Your task is to assess whether the following change to a medical device is signi
 Return the output in this structure:
 1. **Change Type**
 2. **Is the Change Significant?** (Yes/No)
-3. **Cited Clause or Chart**
+3. **Cited Clause and Chart both**
 4. **Supporting Text or Quote**
 5. **Justification**  
    Provide a detailed paragraph (100–200 words) explaining why the change is or isn’t significant.  
