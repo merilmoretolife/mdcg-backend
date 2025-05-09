@@ -5,16 +5,13 @@ from datetime import datetime
 import uuid
 import openai
 import os
+from openai import OpenAI
 
 # Read the full MDCG guidance from the text file
 with open("mdcg_2020_3.txt", "r", encoding="utf-8") as f:
     mdcg_text = f.read()
 
-# Load OpenAI API key from environment
-openai.api_key = os.getenv("OPENAI_API_KEY")
-
-app = Flask(__name__)
-CORS(app)
+client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 def assess_change_with_ai(change_description):
     prompt = f"""
@@ -36,13 +33,13 @@ Change Description:
 
 Respond in clear bullet point format.
 """
-    response = openai.ChatCompletion.create(
-        model="gpt-4o",  # or "gpt-3.5-turbo" for faster/cheaper
+    response = client.chat.completions.create(
+        model="gpt-4o",
         messages=[{"role": "user", "content": prompt}],
         temperature=0.3
     )
-    return response.choices[0].message['content']
-
+    return response.choices[0].message.content
+    
 @app.route('/assess', methods=['POST'])
 def assess():
     data = request.get_json()
