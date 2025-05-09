@@ -42,7 +42,14 @@ Return the output in this structure:
 2. **Is the Change Significant?** (Yes/No)
 3. **Cited Clause or Chart**
 4. **Supporting Text or Quote**
-5. **Regulatory Action Required**
+5. **Justification**  
+   Provide a detailed paragraph (100–200 words) explaining why the change is or isn’t significant.  
+   Your justification must:
+   - Explain how the change affects intended purpose, design, safety, software, etc.
+   - Clearly connect that impact to the definition of "significant change" from MDCG 2020-3 Rev.1
+   - Cite specific MDCG sections (e.g., “Section 4.3.2.3”) or Charts (e.g., “Chart C”) when possible
+
+6. **Regulatory Action Required**
    - If MDR Certified:
    - If MDD Certified (legacy):
 """
