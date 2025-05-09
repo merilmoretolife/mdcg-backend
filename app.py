@@ -21,7 +21,7 @@ Your task is to assess whether the following change to a medical device is signi
 🔹 You MUST:
 - Classify the change type (e.g., software, design, labeling, etc.)
 - State whether the change is significant: Yes / No
-- Cite the specific section or chart (e.g., "Section 4.3.2.3", "Chart C") that supports your assessment
+- Cite the specific section and chart both(e.g., "Section 4.3.2.3", "Chart C") that supports your assessment
 - Quote the relevant line(s) from the MDCG guidance text if possible
 - Do NOT recommend MDR certification unless the guidance requires it as a consequence of a significant change
 - Provide **two separate recommendations**:
