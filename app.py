@@ -7,37 +7,52 @@ import uuid
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
 with open("mdcg_2020_3.txt", "r", encoding="utf-8") as f:
-    mdcg_text = f.read()
+    mdcg_text = f.read()[:12000]
 
 app = Flask(__name__)
 CORS(app)
 
 def assess_change_with_ai(change_description):
     prompt = f"""
-You are a regulatory affairs expert evaluating changes to medical devices under the EU MDR.
+You are an EU medical device regulatory expert.
 
-Your job is to analyze the change below using the official MDCG 2020-3 Rev.1 guidance, and provide:
+Your task is to assess whether the following change to a medical device is significant or not, using only the content provided from MDCG 2020-3 Rev.1 guidance (see below).
 
-1. The change type (e.g., design, software, labeling)
-2. Whether the change is significant (Yes/No)
-3. Justification with reference to the guidance
-4. Recommended regulatory actions
+🔹 You MUST:
+- Classify the change type (e.g., software, design, labeling, etc.)
+- State whether the change is significant: Yes / No
+- Cite the specific section or chart (e.g., "Section 4.3.2.3", "Chart C") that supports your assessment
+- Quote the relevant line(s) from the MDCG guidance text if possible
+- Do NOT recommend MDR certification unless the guidance requires it as a consequence of a significant change
+- Provide **two separate recommendations**:
+   1. If the device is **MDR certified**
+   2. If the device is still under **MDD certificate** (legacy device under Article 120(3) MDR)
 
-=== MDCG Guidance (Excerpt) ===
-{mdcg_text[:12000]}
+🔹 Only use the text below for your response. Do not rely on prior model knowledge.
+
+=== MDCG 2020-3 Rev.1 Guidance Text (truncated) ===
+{mdcg_text}
 === End Guidance ===
 
-Change Description:
+🔸 Change Description:
 \"\"\"{change_description}\"\"\"
 
-Respond in clear bullet point format.
+Return the output in this structure:
+1. **Change Type**
+2. **Is the Change Significant?** (Yes/No)
+3. **Cited Clause or Chart**
+4. **Supporting Text or Quote**
+5. **Regulatory Action Required**
+   - If MDR Certified:
+   - If MDD Certified (legacy):
 """
+
     response = openai.ChatCompletion.create(
         model="gpt-4o",
         messages=[{"role": "user", "content": prompt}],
         temperature=0.3
     )
-    return response.choices[0]['message']['content']
+    return response.choices[0]["message"]["content"]
 
 @app.route('/assess', methods=['POST'])
 def assess():
