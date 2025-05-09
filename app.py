@@ -11,7 +11,7 @@ from openai import OpenAI
 with open("mdcg_2020_3.txt", "r", encoding="utf-8") as f:
     mdcg_text = f.read()
 
-client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+client = OpenAI()
 
 def assess_change_with_ai(change_description):
     prompt = f"""
