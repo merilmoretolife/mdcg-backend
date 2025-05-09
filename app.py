@@ -11,7 +11,7 @@ from openai import OpenAI
 with open("mdcg_2020_3.txt", "r", encoding="utf-8") as f:
     mdcg_text = f.read()
 
-client = OpenAI()
+openai.api_key = os.getenv("OPENAI_API_KEY")
 
 def assess_change_with_ai(change_description):
     prompt = f"""
@@ -33,11 +33,11 @@ Change Description:
 
 Respond in clear bullet point format.
 """
-    response = client.chat.completions.create(
-        model="gpt-4o",
-        messages=[{"role": "user", "content": prompt}],
-        temperature=0.3
-    )
+response = openai.ChatCompletion.create(
+    model="gpt-4o",
+    messages=[{"role": "user", "content": prompt}],
+    temperature=0.3
+)
     return response.choices[0].message.content
     
 @app.route('/assess', methods=['POST'])
