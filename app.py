@@ -1,9 +1,11 @@
 from flask import Flask, request, jsonify
+from flask_cors import CORS
 import re
 from datetime import datetime
 import uuid
 
 app = Flask(__name__)
+CORS(app)
 
 # Basic NLP keyword matching for text analysis
 def analyze_text_input(text, change_type):
