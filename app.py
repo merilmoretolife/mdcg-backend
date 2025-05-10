@@ -25,12 +25,14 @@ Your task is to assess whether the following change to a medical device is signi
 - Quote the relevant line(s) from the MDCG guidance text if possible
 - Use the chart mapping below to cite the chart based on the change type
 
-🔸 Chart Mapping:
-- Changes in the intended purpose → Chart A
-- Changes in design → Chart B
-- Software changes → Chart C
-- Material or substance changes → Chart D
-- Sterilization or packaging changes → Chart E
+📌 Chart Mapping (only if applicable):
+- Intended purpose → Chart A
+- Design → Chart B
+- Software → Chart C
+- Materials → Chart D
+- Sterilization or packaging design → Chart E
+
+For **labeling**, use **Section 4.3.2.1 or 4.3.2.2**, and **do not cite a chart**, as it is not covered by Charts A–E.
 
 🔸 Use only the guidance text below for your assessment. Do not rely on prior model knowledge.
 
@@ -46,6 +48,9 @@ Return the output in this exact structure:
 1. **Change Type**
 2. **Is the Change Significant?** (Yes/No)
 3. **Cited Clause and Chart both**
+If the change is related to labeling, IFU, user manuals, warnings, or clarifications, do NOT cite a chart.  
+Only cite **Section 4.3.2.1 or 4.3.2.2**, depending on the nature and risk level of the change.
+
 4. **Supporting Text or Quote**
 5. **Justification**
    Provide a detailed paragraph (100–200 words) explaining why the change is or isn’t significant.
