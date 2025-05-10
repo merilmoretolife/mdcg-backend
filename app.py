@@ -12,6 +12,7 @@ with open("mdcg_2020_3.txt", "r", encoding="utf-8") as f:
 app = Flask(__name__)
 CORS(app)
 
+
 CLAUSE_MAPPING = {
     "intended_purpose": "Section 4.3.2.2",
     "design": "Section 4.3.2.3",
@@ -53,6 +54,10 @@ You are an EU medical device regulatory expert.
 
 Your task is to assess whether the following change to a medical device is significant or not, using only the content provided from MDCG 2020-3 Rev.1 guidance (see below).
 
+🚫 You are not allowed to cite Section 4.1 unless the change type is explicitly "general".
+
+⚠️ Do not default to Section 4.1 simply because a generic definition appears. You MUST cite the appropriate clause based on the change type below.
+
 🔹 You MUST:
 - Classify the change type (e.g., software, design, labeling, etc.)
 - State whether the change is significant: Yes / No
@@ -86,7 +91,7 @@ Return the output in this exact structure:
 1. **Change Type**
 2. **Is the Change Significant?** (Yes/No)
 3. **Cited Clause and Chart both**  
-🟢 You MUST cite the following clause (based on the detected change type): **{mapped_clause}**  
+You MUST write: “{mapped_clause}” as the cited clause for this change. No other clause is allowed.
 If the change type is labeling, IFU, user manual, or warning:
 → Cite the section only (e.g., 4.3.2.1 or 4.3.2.2)  
 → Write: “No chart applicable” for the chart.
