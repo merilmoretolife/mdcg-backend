@@ -12,7 +12,42 @@ with open("mdcg_2020_3.txt", "r", encoding="utf-8") as f:
 app = Flask(__name__)
 CORS(app)
 
+CLAUSE_MAPPING = {
+    "intended_purpose": "Section 4.3.2.2",
+    "design": "Section 4.3.2.3",
+    "software": "Section 4.3.2.3",
+    "materials": "Section 4.3.2.3",
+    "sterilization": "Section 4.3.2.3",
+    "labeling": "Section 4.3.2.1",
+    "editorial": "Section 4.3.2.1",
+    "non_design": "Section 4.2",
+    "general": "Section 4.1"
+}
+
+def classify_change_type(text):
+    text = text.lower()
+    if any(word in text for word in ["indication", "intended use", "intended purpose", "patient population"]):
+        return "intended_purpose"
+    if any(word in text for word in ["design", "control", "alarm", "sensor", "dimension"]):
+        return "design"
+    if any(word in text for word in ["software", "algorithm", "interface", "ui", "interoperability"]):
+        return "software"
+    if any(word in text for word in ["material", "substance", "coating", "polymer", "contact with body"]):
+        return "materials"
+    if any(word in text for word in ["sterilization", "eto", "gamma", "terminal sterilization", "sterile"]):
+        return "sterilization"
+    if any(word in text for word in ["ifu", "instructions", "user manual", "labeling", "label"]):
+        return "labeling"
+    if any(word in text for word in ["spelling", "clarification", "layout", "formatting"]):
+        return "editorial"
+    if any(word in text for word in ["supplier", "manufacturer", "production", "facility", "assembly"]):
+        return "non_design"
+    return "general"
+
 def assess_change_with_ai(change_description):
+    change_type = classify_change_type(change_description)
+    mapped_clause = CLAUSE_MAPPING.get(change_type, "Section 4.1")
+
     prompt = f"""
 You are an EU medical device regulatory expert.
 
