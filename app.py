@@ -27,12 +27,12 @@ Your task is to assess whether the following change to a medical device is signi
 
 📌 Chart Mapping (only if applicable):
 - Intended purpose → Chart A
-- Design → Chart B
+- Design (Control, Alarms, Energy, UI) → Chart B
 - Software → Chart C
-- Materials → Chart D
+- Material/Substance (Human, Animal, Medicinal) → Chart D
 - Sterilization or packaging design → Chart E
 
-For **labeling**, use **Section 4.3.2.1 or 4.3.2.2**, and **do not cite a chart**, as it is not covered by Charts A–E.
+For **labeling**, cite either **Section 4.3.2.1** or **4.3.2.2** (whichever is appropriate), and write **“No chart applicable”** in place of a chart reference.
 
 🔸 Use only the guidance text below for your assessment. Do not rely on prior model knowledge.
 
@@ -47,9 +47,13 @@ Return the output in this exact structure:
 
 1. **Change Type**
 2. **Is the Change Significant?** (Yes/No)
-3. **Cited Clause and Chart both**
-If the change is related to labeling, IFU, user manuals, warnings, or clarifications, do NOT cite a chart.  
-Only cite **Section 4.3.2.1 or 4.3.2.2**, depending on the nature and risk level of the change.
+3. **Cited Clause and Chart both**  
+State the exact clause used (e.g., “Section 4.3.2.1”) and, if applicable, the corresponding chart (e.g., “Chart B”).
+
+- If the change type is labeling, IFU, user manual, or warning:
+  → Cite the section only (4.3.2.1 or 4.3.2.2)
+  → Write: “No chart applicable”
+
 
 4. **Supporting Text or Quote**
 5. **Justification**
