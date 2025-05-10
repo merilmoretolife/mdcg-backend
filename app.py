@@ -21,14 +21,18 @@ Your task is to assess whether the following change to a medical device is signi
 🔹 You MUST:
 - Classify the change type (e.g., software, design, labeling, etc.)
 - State whether the change is significant: Yes / No
-- Cite the specific section and chart both(e.g., "Section 4.3.2.3", "Chart C") that supports your assessment
+- Cite the specific section and chart (e.g., "Section 4.3.2.3", "Chart C") that supports your assessment
 - Quote the relevant line(s) from the MDCG guidance text if possible
-- Do NOT recommend MDR certification unless the guidance requires it as a consequence of a significant change
-- Provide **two separate recommendations**:
-   1. If the device is **MDR certified**
-   2. If the device is still under **MDD certificate** (legacy device under Article 120(3) MDR)
+- Use the chart mapping below to cite the chart based on the change type
 
-🔹 Only use the text below for your response. Do not rely on prior model knowledge.
+🔸 Chart Mapping:
+- Changes in the intended purpose → Chart A
+- Changes in design → Chart B
+- Software changes → Chart C
+- Material or substance changes → Chart D
+- Sterilization or packaging changes → Chart E
+
+🔸 Use only the guidance text below for your assessment. Do not rely on prior model knowledge.
 
 === MDCG 2020-3 Rev.1 Guidance Text (truncated) ===
 {mdcg_text}
@@ -37,26 +41,29 @@ Your task is to assess whether the following change to a medical device is signi
 🔸 Change Description:
 \"\"\"{change_description}\"\"\"
 
-Return the output in this structure:
+Return the output in this exact structure:
+
 1. **Change Type**
 2. **Is the Change Significant?** (Yes/No)
 3. **Cited Clause and Chart both**
 4. **Supporting Text or Quote**
-5. **Justification**  
-   Provide a detailed paragraph (100–200 words) explaining why the change is or isn’t significant.  
+5. **Justification**
+   Provide a detailed paragraph (100–200 words) explaining why the change is or isn’t significant.
    Your justification must:
    - Explain how the change affects intended purpose, design, safety, software, etc.
    - Clearly connect that impact to the definition of "significant change" from MDCG 2020-3 Rev.1
-   - Cite specific MDCG sections (e.g., “Section 4.3.2.3”) or Charts (e.g., “Chart C”) when possible
+   - Cite specific sections (e.g., “Section 4.3.2.3”) and the correct Chart (A–E)
 
 6. **Regulatory Action Required**
-   You MUST:
-   - Clearly specify what the manufacturer should do if the device is **MDR certified**
-   - Clearly specify what to do if the device is **MDD certified (legacy)** under Article 120(3)
-   - Write a statement on whether the change should be notified to notifying body or not and why:
-     
-"""
+   - If MDR certified: what the manufacturer must do
+   - If MDD certified (legacy): what the manufacturer must do under Article 120(3)
 
+7. **Notification to Notified Body**
+   Clearly state whether this change should be notified to the Notified Body or not, and why.
+   - If significant → explain that it must be notified and why
+   - If non-significant → explain why notification is not required
+"""
+    
     response = openai.ChatCompletion.create(
         model="gpt-4o",
         messages=[{"role": "user", "content": prompt}],
