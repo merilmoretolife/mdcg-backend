@@ -69,6 +69,9 @@ Your task is to assess whether the following change to a medical device is signi
 
 For **labeling**, cite either **Section 4.3.2.1** or **4.3.2.2** (whichever is appropriate), and write **“No chart applicable”** in place of a chart reference.
 
+📘 Detected Change Type: **{change_type.replace("_", " ").title()}**
+📘 You MUST cite this clause in Section 3: **{mapped_clause}**
+
 🔸 Use only the guidance text below for your assessment. Do not rely on prior model knowledge.
 
 === MDCG 2020-3 Rev.1 Guidance Text (truncated) ===
@@ -83,12 +86,10 @@ Return the output in this exact structure:
 1. **Change Type**
 2. **Is the Change Significant?** (Yes/No)
 3. **Cited Clause and Chart both**  
-State the exact clause used (e.g., “Section 4.3.2.1”) and, if applicable, the corresponding chart (e.g., “Chart B”).
-
-- If the change type is labeling, IFU, user manual, or warning:
-  → Cite the section only (4.3.2.1 or 4.3.2.2)
-  → Write: “No chart applicable”
-
+🟢 You MUST cite the following clause (based on the detected change type): **{mapped_clause}**  
+If the change type is labeling, IFU, user manual, or warning:
+→ Cite the section only (e.g., 4.3.2.1 or 4.3.2.2)  
+→ Write: “No chart applicable” for the chart.
 
 4. **Supporting Text or Quote**
 5. **Justification**
