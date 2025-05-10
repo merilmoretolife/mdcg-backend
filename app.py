@@ -86,7 +86,8 @@ Return the output in this exact structure:
 1. **Change Type**
 2. **Is the Change Significant?** (Yes/No)
 3. **Cited Clause and Chart both**  
-🟢 You MUST cite the following clause (based on the detected change type): **{mapped_clause}**  
+You MUST cite the following clause (based on the detected change type): **{mapped_clause}**
+Don't cite 4.1 unless the change is extremely generic.
 If the change type is labeling, IFU, user manual, or warning:
 → Cite the section only (e.g., 4.3.2.1 or 4.3.2.2)  
 → Write: “No chart applicable” for the chart.
