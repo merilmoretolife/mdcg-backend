@@ -49,6 +49,22 @@ def assess_change_with_ai(change_description):
     mapped_clause = CLAUSE_MAPPING.get(change_type, "Section 4.1")
 
     prompt = f"""
+📌 Clause Mapping (Mandatory for Section 3):
+You MUST use the clause that matches the change type detected in Section 1:
+
+- Intended Purpose → Section 4.3.2.2  
+- Design → Section 4.3.2.3  
+- Software → Section 4.3.2.3  
+- Materials → Section 4.3.2.3  
+- Sterilization → Section 4.3.2.3  
+- Labeling → Section 4.3.2.1  
+- Editorial → Section 4.3.2.1  
+- Non-Design → Section 4.2  
+- General → Section 4.1
+
+📘 Detected Change Type: **{change_type.replace("_", " ").title()}**  
+📘 Based on the change type above, you MUST cite: **{mapped_clause}** in Section 3. No other clause is allowed.
+
 You are an EU medical device regulatory expert.
 
 Your task is to assess whether the following change to a medical device is significant or not, using only the content provided from MDCG 2020-3 Rev.1 guidance (see below).
@@ -86,8 +102,9 @@ Return the output in this exact structure:
 1. **Change Type**
 2. **Is the Change Significant?** (Yes/No)
 3. **Cited Clause and Chart both**  
-You MUST cite the following clause (based on the detected change type): **{mapped_clause}**
-Don't cite 4.1 unless the change is extremely generic.
+You MUST cite the clause: **{mapped_clause}**  
+Only use “Section 4.1” if the detected change type is “General”. Otherwise, use the correct clause above.
+
 If the change type is labeling, IFU, user manual, or warning:
 → Cite the section only (e.g., 4.3.2.1 or 4.3.2.2)  
 → Write: “No chart applicable” for the chart.
